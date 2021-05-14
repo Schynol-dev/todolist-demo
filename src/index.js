@@ -10,7 +10,7 @@ ReactDOM.render(
 	<React.StrictMode>
 		<RecoilRoot>
 			<ThemeProvider theme={theme}>
-			<React.Suspense fallback={<h1>Loading Items...</h1>}><App /></React.Suspense>
+				<App />
 			</ThemeProvider>
 		</RecoilRoot>
 	</React.StrictMode>,
