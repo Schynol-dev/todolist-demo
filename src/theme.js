@@ -1,4 +1,4 @@
-export default {
+export const theme = {
     space: [
       0,
       4,
@@ -40,7 +40,7 @@ export default {
       background: '#fecea8',
       primary: '#e84a5f',
       secondary: '#ff847c',
-      muted: '#e7e5e5'
+      white: '#fff'
     },
     styles: {
       root: {

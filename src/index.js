@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from 'theme-ui';
-import theme from './theme';
+import { theme } from './theme';
 import { RecoilRoot } from 'recoil';
 
 ReactDOM.render(
