@@ -7,7 +7,7 @@ function Navigation(props) {
 		<div
 			sx={{
 				textAlign: 'center',
-				pt: '2rem'
+				p: 4
 			}}
 		>
 			<Link to="/" sx={{ p: '1rem' }}>

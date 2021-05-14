@@ -1,11 +1,19 @@
 import { Box, Container, Heading } from 'theme-ui';
 
-function Home() {
+function Home(props) {
+
 	return (
-		<Box mt={5}>
+		<Box>
 			<Container p={3} bg="white" sx={{ width: [ '100%', '75%', '50%' ] }}>
 				<Heading>Example</Heading>
 			</Container>
+			{props.items.map((item) => {
+				return (
+					<Container p={3} bg="white" sx={{ width: [ '100%', '75%', '50%' ] }}>
+						<Heading>{item.title}</Heading>
+					</Container>
+				);
+			})}
 		</Box>
 	);
 }
