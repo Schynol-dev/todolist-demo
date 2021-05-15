@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Create from './components/Create';
+import Complete from './components/Complete';
 
 function App() {
 	const todoListItems = useRecoilValue(todoListState);
@@ -31,7 +32,9 @@ function App() {
 					<Route exact path="/">
 						<Home items={todoListItems} />
 					</Route>
-					<Route path="/done" />
+					<Route path="/complete">
+						<Complete items={todoListItems} />
+					</Route>
 					<Route path="/create">
 						<Create />
 					</Route>
