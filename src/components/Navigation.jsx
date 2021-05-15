@@ -15,9 +15,6 @@ function Navigation(props) {
 			<Link to="/done" sx={{ p: '1rem' }}>
 				Done Todos
 			</Link>
-			<Link to="/delete" sx={{ p: '1rem' }}>
-				Deleted Todos
-			</Link>
 			<Link to="/create" sx={{ p: '1rem' }}>
 				New Todo
 			</Link>

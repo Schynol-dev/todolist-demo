@@ -32,7 +32,6 @@ function App() {
 						<Home items={todoListItems} />
 					</Route>
 					<Route path="/done" />
-					<Route path="/delete" />
 					<Route path="/create">
 						<Create />
 					</Route>
