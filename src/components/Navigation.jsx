@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import { Flex, Button } from 'theme-ui';
 import { Link } from 'react-router-dom';
 
 function Navigation(props) {
@@ -14,10 +13,13 @@ function Navigation(props) {
 				Home
 			</Link>
 			<Link to="/done" sx={{ p: '1rem' }}>
-				Done Tasks
+				Done Todos
 			</Link>
 			<Link to="/delete" sx={{ p: '1rem' }}>
-				Deleted Tasks
+				Deleted Todos
+			</Link>
+			<Link to="/create" sx={{ p: '1rem' }}>
+				New Todo
 			</Link>
 		</div>
 	);
