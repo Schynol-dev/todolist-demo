@@ -3,15 +3,15 @@ import { Box, Container, Heading } from 'theme-ui';
 function Home(props) {
 	return (
 		<Box>
-			{props.items.map((item) => {
-				if (!item.completed) {
-					return (
-						<Container key={item.id} mt={1} p={3} bg="white" sx={{ width: [ '100%', '75%', '50%' ] }}>
-							<Heading>{item.title}</Heading>
-						</Container>
-					);
-				}
-			})}
+			<Container p={3}>
+				{props.items.map((item) => {
+						return (
+							<Heading key={item.id} mb={2} p={2} bg="white">
+								{item.title}
+							</Heading>
+						);
+				})}
+			</Container>
 		</Box>
 	);
 }

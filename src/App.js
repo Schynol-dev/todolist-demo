@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { todoListState } from './recoil/todolist';
+import { todoListState, filteredTodoListState } from './recoil/todolist';
 import { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Create from './components/Create';
-import Complete from './components/Complete';
+import Selection from './components/Selection';
+import { Container } from '@theme-ui/components';
 
 function App() {
-	const todoListItems = useRecoilValue(todoListState);
+	const todoListItems = useRecoilValue(filteredTodoListState);
 	const setTodoListItems = useSetRecoilState(todoListState);
 
 	useEffect(() => {
@@ -28,17 +29,17 @@ function App() {
 			<Router>
 				<Navigation />
 
-				<Switch>
-					<Route exact path="/">
-						<Home items={todoListItems} />
-					</Route>
-					<Route path="/complete">
-						<Complete items={todoListItems} />
-					</Route>
-					<Route path="/create">
-						<Create />
-					</Route>
-				</Switch>
+				<Container sx={{ width: [ '100%', '75%', '50%' ] }}>
+					<Switch>
+						<Route exact path="/">
+							<Selection />
+							<Home items={todoListItems} />
+						</Route>
+						<Route path="/create">
+							<Create />
+						</Route>
+					</Switch>
+				</Container>
 			</Router>
 		</div>
 	);

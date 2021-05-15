@@ -27,7 +27,7 @@ function Create() {
 
 	return (
 		<Box>
-			<Container mt={1} p={3} sx={{ width: [ '100%', '75%', '50%' ] }}>
+			<Container mt={1} p={3}>
 				<Label mb={2} sx={{ fontSize: 4 }}>
 					New todo
 				</Label>
