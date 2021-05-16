@@ -5,11 +5,11 @@ function Home(props) {
 		<Box>
 			<Container p={3}>
 				{props.items.map((item) => {
-						return (
-							<Heading key={item.id} mb={2} p={2} bg="white">
-								{item.title}
-							</Heading>
-						);
+					return (
+						<Heading key={item.id} mb={2} p={2} bg="white">
+							{item.title}
+						</Heading>
+					);
 				})}
 			</Container>
 		</Box>

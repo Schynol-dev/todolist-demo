@@ -12,11 +12,11 @@ export const todoListFilterState = atom({
 
 export const filteredTodoListState = selector({
 	key: 'filteredTodoListState',
-	get: ({get}) => {
+	get: ({ get }) => {
 		const filter = get(todoListFilterState);
 		const list = get(todoListState);
 
-		switch(filter) {
+		switch (filter) {
 			case 'Show Completed':
 				return list.filter((item) => item.completed);
 			case 'Show Uncompleted':
@@ -24,5 +24,21 @@ export const filteredTodoListState = selector({
 			default:
 				return list;
 		}
+	}
+});
+
+export const searchFieldTodoListState = atom({
+	key: 'searchFieldTodoListState',
+	default: ''
+});
+
+export const filteredSearchFieldTodoListState = selector({
+	key: 'filteredSearchFieldTodoListState',
+	get: ({ get }) => {
+		const searchValue = get(searchFieldTodoListState);
+		const list = get(filteredTodoListState);
+		const regex = new RegExp(`^${searchValue}`, 'gi');
+
+		return list.filter((item) => item.title.match(regex));
 	}
 });
