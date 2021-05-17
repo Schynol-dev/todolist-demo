@@ -1,5 +1,5 @@
 import { Box, Checkbox, Grid, Heading, Label, Text } from '@theme-ui/components';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { todoListState } from '../recoil/todolist';
 import { replaceItemAtIndex } from '../utility/arrayIndex';
@@ -27,9 +27,6 @@ function Item(props) {
 				<Heading>{props.todo.title}</Heading>
 				<Link to={`/todo/edit/:${props.todo.id}`}>
 					<Text>Edit</Text>
-				</Link>
-				<Link>
-					<Text>Details</Text>
 				</Link>
 			</Grid>
 		</Box>

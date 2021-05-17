@@ -1,4 +1,4 @@
-import { Box, Container, Heading } from 'theme-ui';
+import { Box, Container } from 'theme-ui';
 import Item from './Item';
 
 function Home(props) {

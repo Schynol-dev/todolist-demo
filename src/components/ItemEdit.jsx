@@ -14,12 +14,11 @@ function ItemEdit() {
 	const [ text, setText ] = useRecoilState(textState);
 	const textCharCount = useRecoilValue(textCharCountState);
 	const [ todoList, setTodoList ] = useRecoilState(todoListState);
-	const todoListValue = useRecoilValue(todoListState);
 	const index = todoList.findIndex((item) => item.id === urlId);
 
 	const updateItem = () => {
 		const newList = replaceItemAtIndex(todoList, index, {
-			...todoListValue[index],
+			...todoList[index],
 			title: text
 		});
 
@@ -27,8 +26,8 @@ function ItemEdit() {
 	};
 
 	useEffect(() => {
-		setText(todoListValue[index].title);
-	}, []);
+		setText(todoList[index].title);
+	});
 
 	return (
 		<Box>

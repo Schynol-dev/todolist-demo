@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { todoListState, filteredSearchFieldTodoListState } from './recoil/todolist';
 import { useEffect } from 'react';
@@ -25,7 +25,7 @@ function App() {
 				.catch((error) => error);
 		};
 		fetchToDoListItems();
-	}, []);
+	});
 
 	return (
 		<div>
