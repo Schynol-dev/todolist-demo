@@ -27,6 +27,20 @@ export const filteredTodoListState = selector({
 	}
 });
 
+export const todoListStatsState = selector({
+	key: 'todoListStatsState',
+	get: ({get}) => {
+		const todoList = get(todoListState);
+		const totalCompletedNumber = todoList.filter((item) => !item.completed).length;
+		const totalUncompletedNumber = todoList.filter((item) => item.completed).length;
+
+		return {
+			totalCompletedNumber,
+			totalUncompletedNumber
+		}
+	}
+});
+
 export const searchFieldTodoListState = atom({
 	key: 'searchFieldTodoListState',
 	default: ''

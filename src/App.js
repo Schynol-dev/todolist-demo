@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Create from './components/Create';
 import Selection from './components/Selection';
 import Search from './components/Search';
+import Counter from './components/Counter';
 
 function App() {
 	const todoListItems = useRecoilValue(filteredSearchFieldTodoListState);
@@ -37,6 +38,7 @@ function App() {
 								<Search />
 								<Selection />
 							</Grid>
+							<Counter />
 							<Home items={todoListItems} />
 						</Route>
 						<Route path="/create">
