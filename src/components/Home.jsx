@@ -1,15 +1,12 @@
 import { Box, Container, Heading } from 'theme-ui';
+import Item from './Item';
 
 function Home(props) {
 	return (
 		<Box>
 			<Container p={3}>
 				{props.items.map((item) => {
-					return (
-						<Heading key={item.id} mb={2} p={2} bg="white">
-							{item.title}
-						</Heading>
-					);
+					return <Item key={item.id} todo={item} />;
 				})}
 			</Container>
 		</Box>
