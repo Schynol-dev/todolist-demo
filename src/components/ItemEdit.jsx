@@ -4,19 +4,22 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { textState, textCharCountState } from '../recoil/characterCounter';
 import { replaceItemAtIndex } from '../utility/arrayIndex';
 import { todoListState } from '../recoil/todolist';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-function ItemEdit(props) {
+function ItemEdit() {
 	const textAreaRef = useRef(null);
+	const { id } = useParams();
+	const urlId = parseInt(id.substring(1), 10);
 
 	const [ text, setText ] = useRecoilState(textState);
 	const textCharCount = useRecoilValue(textCharCountState);
 	const [ todoList, setTodoList ] = useRecoilState(todoListState);
-	const index = todoList.findIndex((item) => item === props.todo);
+	const todoListValue = useRecoilValue(todoListState);
+	const index = todoList.findIndex((item) => item.id === urlId);
 
 	const updateItem = () => {
 		const newList = replaceItemAtIndex(todoList, index, {
-			...props.todo,
+			...todoListValue[index],
 			title: text
 		});
 
@@ -24,7 +27,7 @@ function ItemEdit(props) {
 	};
 
 	useEffect(() => {
-		setText(props.todo.title);
+		setText(todoListValue[index].title);
 	}, []);
 
 	return (

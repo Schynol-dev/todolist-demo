@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { todoListState, filteredSearchFieldTodoListState } from './recoil/todolist';
 import { useEffect } from 'react';
@@ -9,6 +9,7 @@ import Create from './components/Create';
 import Selection from './components/Selection';
 import Search from './components/Search';
 import Counter from './components/Counter';
+import ItemEdit from './components/ItemEdit';
 
 function App() {
 	const todoListItems = useRecoilValue(filteredSearchFieldTodoListState);
@@ -33,7 +34,7 @@ function App() {
 
 				<Container sx={{ width: [ '100%', '75%', '50%' ] }}>
 					<Switch>
-						<Route path="/">
+						<Route exact path="/">
 							<Grid gap={0} columns={[ 1, 2, 2 ]}>
 								<Search />
 								<Selection />
@@ -43,6 +44,9 @@ function App() {
 						</Route>
 						<Route path="/create">
 							<Create />
+						</Route>
+						<Route path={`/todo/edit/:id`}>
+							<ItemEdit />
 						</Route>
 					</Switch>
 				</Container>
