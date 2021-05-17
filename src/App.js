@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { todoListState, filteredSearchFieldTodoListState } from './recoil/todolist';
 import { useEffect } from 'react';
@@ -32,7 +32,7 @@ function App() {
 
 				<Container sx={{ width: [ '100%', '75%', '50%' ] }}>
 					<Switch>
-						<Route exact path="/">
+						<Route path="/">
 							<Grid gap={0} columns={[ 1, 2, 2 ]}>
 								<Search />
 								<Selection />
