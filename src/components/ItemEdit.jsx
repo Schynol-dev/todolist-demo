@@ -27,7 +27,7 @@ function ItemEdit() {
 
 	useEffect(() => {
 		setText(todoList[index].title);
-	});
+	}, [index, setText, todoList]);
 
 	return (
 		<Box>

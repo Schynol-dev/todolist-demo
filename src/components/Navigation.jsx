@@ -1,21 +1,33 @@
-/** @jsxImportSource theme-ui */
+import { Flex, Text } from '@theme-ui/components';
 import { Link } from 'react-router-dom';
 
 function Navigation(props) {
 	return (
-		<div
+		<Flex
 			sx={{
-				textAlign: 'center',
+				justifyContent: 'center',
 				p: 4
 			}}
 		>
-			<Link to="/" sx={{ p: '1rem' }}>
-				Home
-			</Link>
-			<Link to="/create" sx={{ p: '1rem' }}>
-				New Todo
-			</Link>
-		</div>
+			{props.links.map((link) => {
+				return (
+					<Text
+						sx={{
+							p: '1rem',
+							a: {
+								textDecoration: 'none',
+								color: 'text',
+								fontSize: 3,
+								fontWeight: 'bold',
+								'&:hover': { color: '#000', borderBottom: 'solid 3px #e84a5f' }
+							}
+						}}
+					>
+						<Link to={link.to}>{link.text}</Link>
+					</Text>
+				);
+			})}
+		</Flex>
 	);
 }
 
