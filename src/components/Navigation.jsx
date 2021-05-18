@@ -9,9 +9,10 @@ function Navigation(props) {
 				p: 4
 			}}
 		>
-			{props.links.map((link) => {
+			{props.links.map((link, index) => {
 				return (
 					<Text
+						key={index}
 						sx={{
 							p: '1rem',
 							a: {
