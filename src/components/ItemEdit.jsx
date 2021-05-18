@@ -1,4 +1,4 @@
-import { Box, Container, Textarea, Label, Button, Grid } from 'theme-ui';
+import { Box, Textarea, Label, Button, Grid } from 'theme-ui';
 import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { textState, textCharCountState } from '../recoil/characterCounter';
@@ -25,38 +25,39 @@ function ItemEdit() {
 		setTodoList(newList);
 	};
 
-	useEffect(() => {
-		setText(todoList[index].title);
-	}, [index, setText, todoList]);
+	useEffect(
+		() => {
+			setText(todoList[index].title);
+		},
+		[ index, setText, todoList ]
+	);
 
 	return (
-		<Box>
-			<Container mt={1} p={3}>
-				<Label mb={2} sx={{ fontSize: 4 }}>
-					Todo description
+		<Box mt={1} p={3}>
+			<Label mb={2} sx={{ fontSize: 4 }}>
+				Todo description
+			</Label>
+			<Textarea
+				ref={textAreaRef}
+				rows={3}
+				mb={2}
+				sx={{ fontSize: 3 }}
+				value={text}
+				placeholder="Todo description"
+				onChange={(event) => {
+					setText(event.target.value);
+				}}
+			/>
+			<Grid columns={[ 2, 2, 2 ]}>
+				<Link to="/">
+					<Button sx={{ cursor: 'pointer' }} onClick={updateItem}>
+						Update
+					</Button>
+				</Link>
+				<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
+					characters: {textCharCount}
 				</Label>
-				<Textarea
-					ref={textAreaRef}
-					rows={3}
-					mb={2}
-					sx={{ fontSize: 3 }}
-					value={text}
-					placeholder="Todo description"
-					onChange={(event) => {
-						setText(event.target.value);
-					}}
-				/>
-				<Grid columns={[ 2, 2, 2 ]}>
-					<Link to="/">
-						<Button sx={{ cursor: 'pointer', maxWidth: '60%' }} onClick={updateItem}>
-							Update
-						</Button>
-					</Link>
-					<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
-						characters: {textCharCount}
-					</Label>
-				</Grid>
-			</Container>
+			</Grid>
 		</Box>
 	);
 }

@@ -1,8 +1,9 @@
 // Becouse it's demo application I decided to set a static values for dates as it is set up by the backend.
 
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Box, Container, Textarea, Label, Button, Grid } from 'theme-ui';
+import { Box, Textarea, Label, Button, Grid } from 'theme-ui';
 import { textState, textCharCountState } from '../recoil/characterCounter';
 import { todoListState } from '../recoil/todolist';
 
@@ -33,30 +34,30 @@ function Create() {
 	};
 
 	return (
-		<Box>
-			<Container mt={1} p={3}>
-				<Label mb={2} sx={{ fontSize: 4 }}>
-					New todo
-				</Label>
-				<Textarea
-					ref={textAreaRef}
-					rows={3}
-					mb={2}
-					sx={{ fontSize: 3 }}
-					placeholder="Todo description"
-					onChange={(event) => {
-						setText(event.target.value);
-					}}
-				/>
-				<Grid columns={[ 2, 2, 2 ]}>
-					<Button sx={{ cursor: 'pointer', maxWidth: '60%' }} onClick={createNewTodo}>
+		<Box mt={1} p={3}>
+			<Label mb={2} sx={{ fontSize: 4 }}>
+				New todo
+			</Label>
+			<Textarea
+				ref={textAreaRef}
+				rows={3}
+				mb={2}
+				sx={{ fontSize: 3 }}
+				placeholder="Todo description"
+				onChange={(event) => {
+					setText(event.target.value);
+				}}
+			/>
+			<Grid columns={[ 2, 2, 2 ]}>
+				<Link to="/">
+					<Button sx={{ cursor: 'pointer' }} onClick={createNewTodo}>
 						New todo
 					</Button>
-					<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
-						characters: {textCharCount}
-					</Label>
-				</Grid>
-			</Container>
+				</Link>
+				<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
+					characters: {textCharCount}
+				</Label>
+			</Grid>
 		</Box>
 	);
 }
