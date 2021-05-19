@@ -10,6 +10,7 @@ import Selection from './components/Selection';
 import Search from './components/Search';
 import Counter from './components/Counter';
 import ItemEdit from './components/ItemEdit';
+import Footer from './components/Footer';
 
 function App() {
 	const todoListItems = useRecoilValue(filteredSearchFieldTodoListState);
@@ -32,7 +33,7 @@ function App() {
 
 	return (
 		<Router>
-			<Navigation links={[{text: 'Home', to: '/'}, {text: 'New Todo', to: '/create'}]} />
+			<Navigation links={[ { text: 'Home', to: '/' }, { text: 'New Todo', to: '/create' } ]} />
 
 			<Container sx={{ width: [ '100%', '75%', '50%' ] }}>
 				<Switch>
@@ -52,6 +53,8 @@ function App() {
 					</Route>
 				</Switch>
 			</Container>
+
+			<Footer />
 		</Router>
 	);
 }
