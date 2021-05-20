@@ -18,8 +18,8 @@ function App() {
 
 	useEffect(
 		() => {
-			const fetchToDoListItems = async () => {
-				await fetch('https://gorest.co.in/public-api/todos')
+			const fetchToDoListItems = () => {
+				fetch('https://gorest.co.in/public-api/todos')
 					.then((response) => response.json())
 					.then((data) => {
 						setTodoListItems(() => [ ...data.data ]);
