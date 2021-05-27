@@ -12,7 +12,7 @@ function ItemDetails() {
 
 	const [ text, setText ] = useRecoilState(textState);
 	const textCharCount = useRecoilValue(textCharCountState);
-	const [ todoList, setTodoList ] = useRecoilState(todoListState);
+	const todoList = useRecoilValue(todoListState);
 	const index = todoList.findIndex((item) => item.id === urlId);
 
 	useEffect(
