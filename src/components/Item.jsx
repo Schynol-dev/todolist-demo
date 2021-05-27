@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Heading, Label, Button, Box, IconButton } from '@theme-ui/components';
+import { Checkbox, Flex, Heading, Label, Button, Box } from '@theme-ui/components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
