@@ -48,7 +48,7 @@ function Item(props) {
 			<Box sx={{ width: '8rem' }}>
 				<Button sx={{ width: '100%', cursor: 'pointer', '&:hover': { bg: '#f5314b' } }}>Edit</Button>
 
-				<Link>
+				<Link to={`/todo/details/:${props.todo.id}`}>
 					<Button
 						sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px', '&:hover': { bg: '#f5314b' } }}
 					>
@@ -64,7 +64,10 @@ function Item(props) {
 					</Button>
 				</Link>
 
-				<Button sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px', '&:hover': { bg: '#f5314b' } }} onClick={deleteItem}>
+				<Button
+					sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px', '&:hover': { bg: '#f5314b' } }}
+					onClick={deleteItem}
+				>
 					Delete
 				</Button>
 			</Box>

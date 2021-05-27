@@ -1,12 +1,11 @@
-import { Box, Textarea, Label, Button, Grid } from 'theme-ui';
+import { Box, Textarea, Label, Button, Grid } from '@theme-ui/components';
 import { useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { textState, textCharCountState } from '../recoil/characterCounter';
-import { replaceItemAtIndex } from '../utility/arrayIndex';
 import { todoListState } from '../recoil/todolist';
-import { Link, useParams } from 'react-router-dom';
 
-function ItemEdit() {
+function ItemDetails() {
 	const textAreaRef = useRef(null);
 	const { id } = useParams();
 	const urlId = parseInt(id.substring(1), 10);
@@ -15,15 +14,6 @@ function ItemEdit() {
 	const textCharCount = useRecoilValue(textCharCountState);
 	const [ todoList, setTodoList ] = useRecoilState(todoListState);
 	const index = todoList.findIndex((item) => item.id === urlId);
-
-	const updateItem = () => {
-		const newList = replaceItemAtIndex(todoList, index, {
-			...todoList[index],
-			title: text
-		});
-
-		setTodoList(newList);
-	};
 
 	useEffect(
 		() => {
@@ -37,6 +27,14 @@ function ItemEdit() {
 			<Label mb={2} sx={{ fontSize: 4 }}>
 				Todo description
 			</Label>
+			<Grid columns={[ 2, 2, 2 ]}>
+				<Label mb={2} sx={{ fontSize: 1, display: 'block' }}>
+					Created at: {todoList[index].created_at.split('T')[0]}
+				</Label>
+				<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
+					Updated at: {todoList[index].updated_at.split('T')[0]}
+				</Label>
+			</Grid>
 			<Textarea
 				ref={textAreaRef}
 				rows={3}
@@ -44,16 +42,11 @@ function ItemEdit() {
 				sx={{ fontSize: 3 }}
 				value={text}
 				placeholder="Todo description"
-				autoFocus
-				onChange={(event) => {
-					setText(event.target.value);
-				}}
+				disabled
 			/>
 			<Grid columns={[ 2, 2, 2 ]}>
 				<Link to="/">
-					<Button sx={{ cursor: 'pointer', '&:hover': { bg: '#f5314b' } }} onClick={updateItem}>
-						Update
-					</Button>
+					<Button sx={{ cursor: 'pointer', '&:hover': { bg: '#f5314b' } }}>Go Back</Button>
 				</Link>
 				<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
 					characters: {textCharCount}
@@ -63,4 +56,4 @@ function ItemEdit() {
 	);
 }
 
-export default ItemEdit;
+export default ItemDetails;

@@ -44,13 +44,14 @@ function Create() {
 				mb={2}
 				sx={{ fontSize: 3 }}
 				placeholder="Todo description"
+				autoFocus
 				onChange={(event) => {
 					setText(event.target.value);
 				}}
 			/>
 			<Grid columns={[ 2, 2, 2 ]}>
 				<Link to="/">
-					<Button sx={{ cursor: 'pointer' }} onClick={createNewTodo}>
+					<Button sx={{ cursor: 'pointer', '&:hover': { bg: '#f5314b' } }} onClick={createNewTodo}>
 						New todo
 					</Button>
 				</Link>

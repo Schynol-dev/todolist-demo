@@ -10,6 +10,7 @@ import Selection from './components/Selection';
 import Search from './components/Search';
 import Counter from './components/Counter';
 import ItemEdit from './components/ItemEdit';
+import ItemDetails from './components/ItemDetails';
 import Footer from './components/Footer';
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
 					</Route>
 					<Route path={`/todo/edit/:id`}>
 						<ItemEdit />
+					</Route>
+					<Route path={`/todo/details/:id`}>
+						<ItemDetails />
 					</Route>
 				</Switch>
 			</Container>
