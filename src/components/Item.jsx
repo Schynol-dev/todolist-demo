@@ -1,8 +1,8 @@
-import { Checkbox, Flex, Heading, Label, Button } from '@theme-ui/components';
+import { Checkbox, Flex, Heading, Label, Button, Box, Text } from '@theme-ui/components';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { todoListState } from '../recoil/todolist';
-import { replaceItemAtIndex } from '../utility/arrayIndex';
+import { removeItemAtIndex, replaceItemAtIndex } from '../utility/arrayIndex';
 
 function Item(props) {
 	const [ todoList, setTodoList ] = useRecoilState(todoListState);
@@ -17,6 +17,12 @@ function Item(props) {
 		setTodoList(newList);
 	};
 
+	const deleteItem = () => {
+		const newList = removeItemAtIndex(todoList, index);
+
+		setTodoList(newList);
+	};
+
 	return (
 		<Flex
 			mb={3}
@@ -24,7 +30,7 @@ function Item(props) {
 			pb={3}
 			pl={2}
 			pr={2}
-			bg='white'
+			bg="white"
 			sx={{
 				alignItems: 'center',
 				justifyContent: 'space-between',
@@ -39,9 +45,29 @@ function Item(props) {
 				{props.todo.title}
 			</Heading>
 
-			<Link to={`/todo/edit/:${props.todo.id}`}>
-				<Button sx={{ width: '8rem', cursor: 'pointer', '&:hover': { bg: '#f5314b' } }}>Edit</Button>
-			</Link>
+			<Box sx={{ width: '8rem' }}>
+				<Button sx={{ width: '100%', cursor: 'pointer', '&:hover': { bg: '#f5314b' } }}>Edit</Button>
+
+				<Link>
+					<Button
+						sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px', '&:hover': { bg: '#f5314b' } }}
+					>
+						Details
+					</Button>
+				</Link>
+
+				<Link to={`/todo/edit/:${props.todo.id}`}>
+					<Button
+						sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px', '&:hover': { bg: '#f5314b' } }}
+					>
+						Edit
+					</Button>
+				</Link>
+
+				<Button sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px', '&:hover': { bg: '#f5314b' } }} onClick={deleteItem}>
+					Delete
+				</Button>
+			</Box>
 		</Flex>
 	);
 }
