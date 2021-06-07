@@ -24,11 +24,17 @@ function ItemDetails() {
 			fetch(`https://gorest.co.in/public-api/todos/${urlId}`)
 				.then((response) => response.json())
 				.then((data) => {
-					setText(data.data.title);
-					setCreated(data.data.created_at.split('T')[0]);
-					setUpdated(data.data.updated_at.split('T')[0]);
+					if (data.code === 200) {
+						setText(data.data.title);
+						setCreated(data.data.created_at.split('T')[0]);
+						setUpdated(data.data.updated_at.split('T')[0]);
+					} else {
+						throw new Error(data.code);
+					}
 				})
-				.catch((error) => error);
+				.catch((errorCode) => {
+					alert('Error occured, ' + errorCode);
+				});
 		},
 		[ index, setText, todoList, urlId ]
 	);

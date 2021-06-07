@@ -27,9 +27,13 @@ function Item(props) {
 						completed: !props.todo.completed
 					});
 					setTodoList(newList);
+				} else {
+					throw new Error(data.code);
 				}
 			})
-			.catch((error) => error);
+			.catch((errorCode) => {
+				alert('Error occured, ' + errorCode);
+			});
 	};
 
 	const deleteItem = () => {
@@ -42,9 +46,13 @@ function Item(props) {
 				if (data.code === 204) {
 					const newList = removeItemAtIndex(todoList, index);
 					setTodoList(newList);
+				} else {
+					throw new Error(data.code);
 				}
 			})
-			.catch((error) => error);
+			.catch((errorCode) => {
+				alert('Error occured, ' + errorCode);
+			});
 	};
 
 	return (

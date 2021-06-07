@@ -32,9 +32,13 @@ function ItemEdit() {
 						title: text
 					});
 					setTodoList(newList);
+				} else {
+					throw new Error(data.code);
 				}
 			})
-			.catch((error) => error);
+			.catch((error) => (errorCode) => {
+				alert('Error occured, ' + errorCode);
+			});
 	};
 
 	useEffect(
