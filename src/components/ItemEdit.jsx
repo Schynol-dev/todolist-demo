@@ -36,7 +36,7 @@ function ItemEdit() {
 					throw new Error(data.code);
 				}
 			})
-			.catch((error) => (errorCode) => {
+			.catch((errorCode) => {
 				alert('Error occured, ' + errorCode);
 			});
 	};

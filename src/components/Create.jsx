@@ -17,25 +17,34 @@ function Create() {
 	const createNewTodo = () => {
 		fetch(`https://gorest.co.in/public-api/users/${lastItemTodoList.user_id}/todos`, {
 			method: 'POST',
-			headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + process.env.REACT_APP_APIKEY},
-			body: JSON.stringify({ 
+			headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + process.env.REACT_APP_APIKEY },
+			body: JSON.stringify({
 				user: lastItemTodoList.user_id,
 				title: text,
 				completed: false
 			})
-		}).then(response => response.json()).then(data => {
-			setTodoListItems((oldItems) => [
-				...oldItems,
-				{
-					id: data.data.id,
-					user_id: lastItemTodoList.user_id,
-					title: text,
-					completed: false,
-					created_at: data.data.created_at,
-					updated_at: data.data.updated_at
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.code === 201) {
+					setTodoListItems((oldItems) => [
+						...oldItems,
+						{
+							id: data.data.id,
+							user_id: lastItemTodoList.user_id,
+							title: text,
+							completed: false,
+							created_at: data.data.created_at,
+							updated_at: data.data.updated_at
+						}
+					]);
+				} else {
+					throw new Error(data.code);
 				}
-			]);
-		}).catch(error => error)
+			})
+			.catch((errorCode) => {
+				alert('Error occured, ' + errorCode);
+			});
 
 		textAreaRef.current.value = '';
 		setText('');
