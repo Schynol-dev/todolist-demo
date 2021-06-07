@@ -43,9 +43,20 @@ function ItemEdit() {
 
 	useEffect(
 		() => {
-			setText(todoList[index].title);
+			fetch(`https://gorest.co.in/public-api/todos/${urlId}`)
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.code === 200) {
+						setText(data.data.title);
+					} else {
+						throw new Error(data.code);
+					}
+				})
+				.catch((errorCode) => {
+					alert('Error occured, ' + errorCode);
+				});
 		},
-		[ index, setText, todoList ]
+		[ index, setText, todoList, urlId ]
 	);
 
 	return (

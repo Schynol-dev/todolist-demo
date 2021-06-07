@@ -48,12 +48,10 @@ function App() {
 					<Route path="/create">
 						<Create />
 					</Route>
-					<Route path={`/todo/edit/:id`}>
-						<ItemEdit />
-					</Route>
-					<Route path={`/todo/details/:id`}>
-						<ItemDetails />
-					</Route>
+					<Route path={`/todo/edit/:id`} render={() => <ItemEdit />} />
+					<Route path={`/todo/details/:id`} render={() => <ItemDetails />} />
+						
+					
 				</Switch>
 			</Container>
 
