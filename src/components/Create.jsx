@@ -1,5 +1,3 @@
-// Becouse it's demo application I decided to set a static values for dates as it is set up by the backend.
-
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -17,17 +15,27 @@ function Create() {
 	const lastItemTodoList = todoList[todoList.length - 1];
 
 	const createNewTodo = () => {
-		setTodoListItems((oldItems) => [
-			...oldItems,
-			{
-				id: lastItemTodoList.id + 1,
-				user_id: 1,
+		fetch(`https://gorest.co.in/public-api/users/${lastItemTodoList.user_id}/todos`, {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + process.env.REACT_APP_APIKEY},
+			body: JSON.stringify({ 
+				user: lastItemTodoList.user_id,
 				title: text,
-				completed: false,
-				created_at: '2021-05-15T03:50:04.464+05:30',
-				updated_at: '2021-05-15T03:50:04.464+05:30'
-			}
-		]);
+				completed: false
+			})
+		}).then(response => response.json()).then(data => {
+			setTodoListItems((oldItems) => [
+				...oldItems,
+				{
+					id: data.data.id,
+					user_id: lastItemTodoList.user_id,
+					title: text,
+					completed: false,
+					created_at: data.data.created_at,
+					updated_at: data.data.updated_at
+				}
+			]);
+		}).catch(error => error)
 
 		textAreaRef.current.value = '';
 		setText('');

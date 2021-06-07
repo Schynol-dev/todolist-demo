@@ -35,7 +35,6 @@ function App() {
 	return (
 		<Router>
 			<Navigation links={[ { text: 'Home', to: '/' }, { text: 'New Todo', to: '/create' } ]} />
-
 			<Container sx={{ width: [ '100%', '75%', '50%' ] }}>
 				<Switch>
 					<Route exact path="/">
