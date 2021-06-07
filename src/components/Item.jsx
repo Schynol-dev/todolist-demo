@@ -21,14 +21,15 @@ function Item(props) {
 	};
 
 	const deleteItem = () => {
-		const newList = removeItemAtIndex(todoList, index);
-
-		setTodoList(newList);
-
 		fetch(`https://gorest.co.in/public-api/todos/${props.todo.id}`, {
 			method: 'DELETE',
 			headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + process.env.REACT_APP_APIKEY},
-		}).then(response => response.json()).then(data => {}).catch(error => error)
+		}).then(response => response.json()).then(data => {
+			if(data.code === 204) {
+				const newList = removeItemAtIndex(todoList, index);
+				setTodoList(newList);
+			}
+		}).catch(error => error)
 	};
 
 	return (
