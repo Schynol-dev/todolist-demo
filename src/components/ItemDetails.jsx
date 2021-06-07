@@ -1,5 +1,5 @@
 import { Box, Textarea, Label, Button, Grid } from '@theme-ui/components';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { textState, textCharCountState } from '../recoil/characterCounter';
@@ -11,15 +11,26 @@ function ItemDetails() {
 	const urlId = parseInt(id.substring(1), 10);
 
 	const [ text, setText ] = useRecoilState(textState);
+	const [ created, setCreated ] = useState('');
+	const [ updated, setUpdated ] = useState('');
 	const textCharCount = useRecoilValue(textCharCountState);
 	const todoList = useRecoilValue(todoListState);
 	const index = todoList.findIndex((item) => item.id === urlId);
 
 	useEffect(
 		() => {
-			setText(todoList[index].title);
+			setText('');
+
+			fetch(`https://gorest.co.in/public-api/todos/${urlId}`)
+				.then((response) => response.json())
+				.then((data) => {
+					setText(data.data.title);
+					setCreated(data.data.created_at.split('T')[0]);
+					setUpdated(data.data.updated_at.split('T')[0]);
+				})
+				.catch((error) => error);
 		},
-		[ index, setText, todoList ]
+		[ index, setText, todoList, urlId ]
 	);
 
 	return (
@@ -29,10 +40,10 @@ function ItemDetails() {
 			</Label>
 			<Grid columns={[ 2, 2, 2 ]}>
 				<Label mb={2} sx={{ fontSize: 1, display: 'block' }}>
-					Created at: {todoList[index].created_at.split('T')[0]}
+					Created at: {created}
 				</Label>
 				<Label mb={2} sx={{ fontSize: 1, display: 'block', textAlign: 'right' }}>
-					Updated at: {todoList[index].updated_at.split('T')[0]}
+					Updated at: {updated}
 				</Label>
 			</Grid>
 			<Textarea

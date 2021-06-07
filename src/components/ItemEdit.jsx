@@ -17,12 +17,24 @@ function ItemEdit() {
 	const index = todoList.findIndex((item) => item.id === urlId);
 
 	const updateItem = () => {
-		const newList = replaceItemAtIndex(todoList, index, {
-			...todoList[index],
-			title: text
-		});
-
-		setTodoList(newList);
+		fetch(`https://gorest.co.in/public-api/todos/${urlId}`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + process.env.REACT_APP_APIKEY },
+			body: JSON.stringify({
+				title: text
+			})
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.code === 200) {
+					const newList = replaceItemAtIndex(todoList, index, {
+						...todoList[index],
+						title: text
+					});
+					setTodoList(newList);
+				}
+			})
+			.catch((error) => error);
 	};
 
 	useEffect(

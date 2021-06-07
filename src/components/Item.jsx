@@ -12,24 +12,39 @@ function Item(props) {
 	const index = todoList.findIndex((item) => item === props.todo);
 
 	const toggleItemCompletion = () => {
-		const newList = replaceItemAtIndex(todoList, index, {
-			...props.todo,
-			completed: !props.todo.completed
-		});
-
-		setTodoList(newList);
+		fetch(`https://gorest.co.in/public-api/todos/${props.todo.id}`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + process.env.REACT_APP_APIKEY },
+			body: JSON.stringify({
+				completed: !props.todo.completed
+			})
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.code === 200) {
+					const newList = replaceItemAtIndex(todoList, index, {
+						...props.todo,
+						completed: !props.todo.completed
+					});
+					setTodoList(newList);
+				}
+			})
+			.catch((error) => error);
 	};
 
 	const deleteItem = () => {
 		fetch(`https://gorest.co.in/public-api/todos/${props.todo.id}`, {
 			method: 'DELETE',
-			headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + process.env.REACT_APP_APIKEY},
-		}).then(response => response.json()).then(data => {
-			if(data.code === 204) {
-				const newList = removeItemAtIndex(todoList, index);
-				setTodoList(newList);
-			}
-		}).catch(error => error)
+			headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + process.env.REACT_APP_APIKEY }
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.code === 204) {
+					const newList = removeItemAtIndex(todoList, index);
+					setTodoList(newList);
+				}
+			})
+			.catch((error) => error);
 	};
 
 	return (
@@ -60,7 +75,7 @@ function Item(props) {
 				onMouseLeave={() => setShowMenu(false)}
 			>
 				<Button sx={{ width: '100%', cursor: 'pointer', borderRadius: '0px' }}>
-					<img src={arrowDown} alt='arrow' />
+					<img src={arrowDown} alt="arrow" />
 				</Button>
 
 				<Box sx={{ position: 'absolute', display: `${showMenu ? '' : 'none'}`, zIndex: '999' }}>
